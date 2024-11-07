@@ -8,17 +8,17 @@ import os
 class Scatter(QtWidgets.QWidget):
     def __init__(self, parent=None):
 
-        QtWidgets.QWidget.__init__(self, parent)
-        self.setWindowTitle('Scatter')
+        QtWidgets.QWidget.__init__(self, parent)            ## This initiates the UI
+        self.setWindowTitle('Scatter')            ##this sets the window title to "scatter"
         self.vBox = QtWidgets.QVBoxLayout()
 
 ##------------------------------------Scatter Object--------------------------------------------##
 
-        hbox1 = QtWidgets.QHBoxLayout()
+        hbox1 = QtWidgets.QHBoxLayout()        ##this creates a layout, everything set within "hbox1" will be next to eachother horizontally
 
-        self.labelScatterObj = QtWidgets.QLabel('Which object do you want to scatter?', self)
-        self.labelScatterObj.setMinimumWidth(175)
-        hbox1.addWidget(self.labelScatterObj)
+        self.labelScatterObj = QtWidgets.QLabel('Which object do you want to scatter?', self)            ##this adds a label
+        self.labelScatterObj.setMinimumWidth(175)             ##this defines the sie of the label
+        hbox1.addWidget(self.labelScatterObj)             ##this adds the label to the hbox1 layout
 
 ##                 ADD THE DROPDOWN OPTIONS!!!!!!!
         self.ddlScatterObj = QtWidgets.QComboBox(self)
