@@ -26,19 +26,18 @@ class Scatter(QtWidgets.QWidget):
         self.vBox.addLayout(hbox1)
 
 ##------------------------------------Scatter Plane---------------------------------------------##
-        '''
+        
         hbox2 = QtWidgets.QHBoxLayout()
 
-        self.labelScatterPlane = QtWidgets.QLabel('Select the plane you want to scatter on', self)
-        self.labelScatterPlane.setMinimumWidth(175)
-        hbox2.addWidget(self.labelScatterPlane)
+        self.labelScatterObjLocation = QtWidgets.QLabel('where is the object located, eg. /obj/geo1/', self)
+        self.labelScatterObjLocation.setMinimumWidth(175)
+        hbox2.addWidget(self.labelScatterObjLocation)
 
-        self.ddlScatterPlane = QtWidgets.QComboBox(self)
-        self.ddlScatterPlane.setMinimumWidth(175)
-        self.ddlScatterPlane.addItem("")
-        hbox2.addWidget(self.ddlScatterPlane)
+        self.textInputScatterObjLocation = QtWidgets.QLineEdit(self)
+        self.textInputScatterObjLocation.setMinimumWidth(175)
+        hbox2.addWidget(self.textInputScatterObjLocation) 
         self.vBox.addLayout(hbox2)
-        '''
+        
 ##-------------------------------------Scatter Num-------------------------------------------------##
 
         hbox3 = QtWidgets.QHBoxLayout()
@@ -149,6 +148,9 @@ class Scatter(QtWidgets.QWidget):
 
     def textHasChangedScatterObj(self):
         scatterObjText = self.textInputScatterObj.text()
+    
+    def textHasChangedScatterObjLocation(self):
+        scatterObjText = self.extInputScatterObjLocation.text()
 
     def textHasChangedScatterNum(self):
         scatterNum = self.textInputScatterNum.text()
@@ -185,6 +187,7 @@ class Scatter(QtWidgets.QWidget):
 
 
         scatterObjText = self.textInputScatterObj.text()
+        scatterObjLocation = self.textInputScatterObjLocation.text()
         scatterNumText = self.textInputScatterNum.text()
         rotationXText = self.textInputRotationX.text()
         rotationYText = self.textInputRotationY.text()
@@ -198,12 +201,12 @@ class Scatter(QtWidgets.QWidget):
 
        # print(scatterObjText)
 
-        scatterObj = hou.node(f'/obj/geo1/{scatterObjText}')
+        scatterObj = hou.node(f'{scatterObjLocation}{scatterObjText}')
         obj = hou.node("/obj")
-        myGeo = hou.node('/obj/geo1')
+        myGeo = hou.node(f'{scatterObjLocation}')
         timesRan = 0
         subnet = myGeo.createNode("subnet", 'scatter')
-        mySub = hou.node('/obj/geo1/scatter/')
+        mySub = hou.node(f'{scatterObjLocation}scatter/')
         merge = mySub.createNode("merge", 'merge1')
         subnet.setInput(0, scatterObj)
 
